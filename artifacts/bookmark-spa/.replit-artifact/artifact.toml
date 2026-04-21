@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "ブックマーク管理"
+version = "1.0.0"
+id = "artifacts/bookmark-spa"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 20660
+
+[services.development]
+run = "pnpm --filter @workspace/bookmark-spa run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/bookmark-spa", "run", "build" ]
+publicDir = "artifacts/bookmark-spa/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "20660"
+BASE_PATH = "/"
