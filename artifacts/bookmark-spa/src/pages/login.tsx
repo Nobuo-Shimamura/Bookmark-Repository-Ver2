@@ -11,8 +11,11 @@ import { BookmarkIcon } from "lucide-react";
 import { useState } from "react";
 
 const loginSchema = z.object({
-  userId: z.string().min(1, "ユーザーIDを入力してください"),
-  password: z.string().min(1, "パスワードを入力してください"),
+  userId: z.string()
+  .min(1, "ユーザーIDを入力してください")
+  .max(8, "ユーザーIDは8桁以内で入力してください"), // 9桁以上でエラー,
+  password: z.string().min(1, "パスワードを入力してください")
+  .max(12, "パスワードは12桁以内で入力してください"), // 13桁以上でエラー,
 });
 
 type LoginFormValues = z.infer<typeof loginSchema>;
@@ -54,7 +57,7 @@ export default function LoginPage() {
             </div>
           </div>
           <CardTitle className="text-2xl font-semibold tracking-tight text-slate-900 dark:text-white">
-            ブックマーク管理
+            ブックマーク管理Ver.2
           </CardTitle>
           <CardDescription className="text-slate-500 dark:text-slate-400">
             個人のブックマークを安全に管理します
@@ -74,7 +77,7 @@ export default function LoginPage() {
                   name="userId"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-slate-700 dark:text-slate-300">ユーザーID</FormLabel>
+                      <FormLabel className="text-slate-700 dark:text-slate-300">ユーザーID(8文字以内)</FormLabel>
                       <FormControl>
                         <Input 
                           placeholder="admin" 
@@ -92,7 +95,7 @@ export default function LoginPage() {
                   name="password"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel className="text-slate-700 dark:text-slate-300">パスワード</FormLabel>
+                      <FormLabel className="text-slate-700 dark:text-slate-300">パスワード(12文字以内)</FormLabel>
                       <FormControl>
                         <Input 
                           type="password" 
