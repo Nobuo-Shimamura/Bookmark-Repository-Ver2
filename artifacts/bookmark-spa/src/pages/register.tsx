@@ -11,7 +11,8 @@ import { useToast } from "@/hooks/use-toast";
 import { ArrowLeft, Save, BookmarkIcon } from "lucide-react";
 
 const registerSchema = z.object({
-  title: z.string().min(1, "タイトルを入力してください"),
+  title: z.string().min(1, "タイトルを入力してください")
+  .max(50, "タイトルは50桁以内で入力してください"), // 51桁以上でエラー,
   url: z.string().min(1, "URLを入力してください").url("正しいURL形式で入力してください"),
 });
 
@@ -71,7 +72,7 @@ export default function RegisterPage() {
                     name="title"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel className="text-slate-700 dark:text-slate-300">タイトル <span className="text-red-500">*</span></FormLabel>
+                        <FormLabel className="text-slate-700 dark:text-slate-300">タイトル(50文字以内) <span className="text-red-500">*</span></FormLabel>
                         <FormControl>
                           <Input 
                             placeholder="例: React公式ドキュメント" 
