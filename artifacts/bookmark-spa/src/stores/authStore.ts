@@ -9,8 +9,8 @@ interface AuthState {
 }
 
 const MOCK_CREDENTIALS = {
-  userId: "admin",
-  password: "password123",
+  userId: "",
+  password: "",
 };
 
 export const useAuthStore = create<AuthState>()(
