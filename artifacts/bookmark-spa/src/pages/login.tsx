@@ -37,7 +37,7 @@ export default function LoginPage() {
     return <Navigate to="/menu" replace />;
   }
 
-  const onSubmit = (data: LoginFormValues) => {
+  const onSubmit = async (data: LoginFormValues) => {
     setError("");
     const success = login(data.userId, data.password);
     if (success) {
@@ -112,6 +112,7 @@ export default function LoginPage() {
               </div>
               <Button 
                 type="submit" 
+                disabled={form.formState.isSubmitting} // 処理中は非活性化
                 className="w-full h-11 text-base bg-teal-600 hover:bg-teal-700 text-white transition-colors"
                 data-testid="button-login"
               >
